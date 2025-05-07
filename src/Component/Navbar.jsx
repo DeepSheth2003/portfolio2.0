@@ -182,7 +182,7 @@ export default function Navbar() {
               </>
             ) : (
               <>
-                <div className="sidebar-btn-div" onClick={()=> firebase.loginWithGoogle().then(()=> window.location.reload())}>
+                <div className="sidebar-btn-div" onClick={()=> {firebase.loginWithGoogle();}}>
                   <div className="sidebar-btn">
                     <div className="sidebar-icon-sign sideIcon"></div>
                   </div>
