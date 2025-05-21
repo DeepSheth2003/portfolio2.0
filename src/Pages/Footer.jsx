@@ -28,7 +28,7 @@ export default function Footer() {
             </div>
             <div className="rightInfo">
                 <p>Feel free to reach out to me for any inquiries or here's my mail.</p>
-                <p onClick={()=> copyMail() }>{
+                <p onClick={()=> {copyMail()} }>{
                     isCopied ? <><i className="fa-solid fa-check"></i> Copied to clipboard!</> : <><i className="fa-regular fa-copy"></i> hello@deepsheth.in</>
                     }</p>
             </div>
