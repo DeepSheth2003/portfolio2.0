@@ -716,6 +716,7 @@
     background: linear-gradient(to right, rgba(255, 166, 0, 0.151) 10%, rgba(0, 128, 0, 0.13) 40%,transparent 95%);
     border-top-left-radius: inherit;
     border-top-right-radius: inherit;
+    word-break: break-all;
 }
 
 .first-line-google>p{
