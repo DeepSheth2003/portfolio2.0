@@ -68,7 +68,7 @@ export default function Connection({checkConnection , setCheckConnection}) {
                                                 <div className="box-icon-google"></div>
                                             </div>
                                             {
-                                                firebase.isUserActive ? <><p>{firebase.isUserActive.email}</p></> : <p>Sign up with Google &nbsp;<i className="fa-solid fa-arrow-right-to-bracket"></i></p>
+                                                firebase.isUserActive ? <><p style={{textWrap: 'wrap'}}>{firebase.isUserActive.email}</p></> : <p>Sign up with Google &nbsp;<i className="fa-solid fa-arrow-right-to-bracket"></i></p>
                                             }
                                         </div>
                                         <div className="second-line-google">
