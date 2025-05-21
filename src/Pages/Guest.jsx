@@ -59,7 +59,7 @@ export default function Guest({updateConnection, setCheckConnection}) {
                             {
                                 firebase.isUserActive ? <>
                                     <form onSubmit={letsComment}>
-                                        <input type="text" placeholder='Share your thoughts...' value={inpVal} onChange={(e)=> setInpVal(e.target.value) } required /> <MoveTo name='Comment' />
+                                        <input type="text" placeholder='Share your thoughts...' value={inpVal} onChange={(e)=> setInpVal(e.target.value) } required /> <MoveTo name='Comment'/>
                                     </form>
                                 </> : <><button onClick={logIn} className='login-box-btn'>Login</button><p>to continue leaving a message</p></>
                             }

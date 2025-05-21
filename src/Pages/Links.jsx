@@ -24,9 +24,9 @@ export default function Links({updateConnection, setCheckConnection}) {
               <p>Developer | Freelancer | Problem Solver</p>
             </div>
             <div className="links-head-btn">
-              <button onClick={()=> window.open('https://deepsheth.netlify.app')}><i class="fa-solid fa-globe" style={{WebkitTextStroke: '0.15px white', color: 'transparent'}}></i>&nbsp; Website</button>
+              <button onClick={()=> window.open('https://deepsheth.netlify.app')}><i className="fa-solid fa-globe" style={{WebkitTextStroke: '0.15px white', color: 'transparent'}}></i>&nbsp; Website</button>
               {
-                isCopied ? <button onClick={copyMail} style={{color: 'green'}}><i class="fa-solid fa-check"></i>&nbsp; Copied to clipboard!</button> : <button onClick={copyMail}><i className="fa-regular fa-copy"></i>&nbsp; hello@deepsheth.in</button>
+                isCopied ? <button onClick={copyMail} style={{color: 'green'}}><i className="fa-solid fa-check"></i>&nbsp; Copied to clipboard!</button> : <button onClick={copyMail}><i className="fa-regular fa-copy"></i>&nbsp; hello@deepsheth.in</button>
               }
             </div>
           </div>

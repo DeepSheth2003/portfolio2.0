@@ -29,14 +29,14 @@ export const FirebaseProvider = (props) => {
     // This is the function which is sending their data to whole application, Want to know How ?
     // This FirebaseProvider Function is wrapped on Whole App.jsx Component. which is coming here is prop and we were sending data to the props.children.
     const [ isUserActive, setIsUserActive ] = useState(null);
-    useEffect(
+    useEffect(()=>{
         onAuthStateChanged(firebaseAuth,(user)=>{
             if(user) setIsUserActive(user);
         })
-    ,[]);
+    }, []);
 
-    const loginWithGoogle = () => {
-        signInWithPopup(firebaseAuth , Google);
+    const loginWithGoogle = async () => {
+        await signInWithPopup(firebaseAuth , Google);
     }
 
     const setUpData = async (comment, userDisplayName, userEmail) => {
@@ -53,8 +53,9 @@ export const FirebaseProvider = (props) => {
         return snapshot;
     }
 
-    const setMessage = async ( email, message, userDisplayName ) => {
+    const setMessage = async ( messagerName, email, message, userDisplayName ) => {
         await addDoc(collection(firestore, 'message'), {
+            name: messagerName,
             email: email,
             message: message,
             userName: userDisplayName

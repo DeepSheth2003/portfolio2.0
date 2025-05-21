@@ -1,6 +1,6 @@
 import React, { useRef } from 'react';
 import { useNavigate } from 'react-router';
-import Resume from '../assets/DeepOriginResume.pdf';
+import Resume from '../assets/DeepsCV.pdf';
 // CSS & Page
 import './pages.css';
 import Education from './Education';

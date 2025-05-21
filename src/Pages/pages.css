@@ -939,6 +939,7 @@
     display: flex;
     gap: 20px;
     width: 100%;
+    z-index: 105;
 }
 
 .login-box input{
@@ -1328,6 +1329,8 @@
     align-items: center;
     gap: 10px;
     color: rgb(43, 43, 255);
+    background-color: var(--bg000);
+    padding-left: 2px;
     cursor: pointer;
 }
 
@@ -1343,6 +1346,7 @@
     font-size: 0.8rem !important;
     font-weight: 500 !important;
     color: var(--textGray);
+    font-family: "Montserrat", sans-serif !important;
 }
 
 /******** Seprate Project Page ********/
@@ -1446,6 +1450,10 @@
 /***************** Media Query 768px *********************/
 
 @media screen and (max-width: 768px) {
+
+    :root{
+        overflow-x: hidden;
+    }
     
     .version{
         width: 90%;

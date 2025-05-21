@@ -1,39 +1,40 @@
 import { useState } from 'react';
 import { useFirebase } from '../Firebase/Firebase'
+import { useNavigate } from 'react-router';
 
 
 export default function Connection({checkConnection , setCheckConnection}) {
     
     const firebase = useFirebase();
-
-    const [isCopied, setIsCopied] = useState(false);
-    const [alarm, setAlarm] = useState(true);
+    const navigate = useNavigate();
     
-    const copyMail = () => {
-    navigator.clipboard.writeText('deepsheth56@gmail.com')
-    .then(()=> setIsCopied(true));
-    }
-
+    const [messagerName, setMessagerName] = useState();
     const [email, setEmail] = useState();
     const [message, setMessage] = useState();
+    const [userNotAvailable, setUserNotAvailable] = useState(false);
+    const [fieldError, setFieldError] = useState(false);
 
     const writeMessage = (e) => {
         e.preventDefault();
         try{
-            firebase.setMessage(email, message, firebase.isUserActive.displayName).then(()=>{
+            firebase.setMessage(messagerName, email, message, firebase.isUserActive.displayName).then(()=>{
                 window.location.reload();
+            },()=>{
+                setFieldError(!fieldError);
             })
         }
         catch{
-            setAlarm(false);
+            setUserNotAvailable(true);
         }
     }
+
+    const [ isOne, setIsOne ] = useState(true);
     
   return (
     <div className={ checkConnection ? 'connection' : 'non-connection' } onClick={()=> setCheckConnection(false)}>
         <div className="connection-box" onClick={(e) => e.stopPropagation()}>
-            <div className="connection-upper-box">
-                <div className="upper-box-icon">
+            <div className="connection-upper">
+                <div className="fix-icon">
                     <div className="connect-box-img" onClick={()=> window.open('tel: 6353304906')}>
                         <div className="box-icon-call"></div>
                     </div>
@@ -47,43 +48,96 @@ export default function Connection({checkConnection , setCheckConnection}) {
                         <div className="box-icon-twitter"></div>
                     </div>
                 </div>
-                <div className="upper-box-button">
-                    <div className="box-button-connection" onClick={()=> window.open('https://github.com/DeepSheth2003')}>
-                        <i className="fa-brands fa-github"></i>
-                        <p>deepsheth2003</p>
-                    </div>
-                    <div className="box-button-connection" onClick={copyMail}>
-                        {
-                            isCopied ? <><i className="fa-solid fa-check" style={{color: 'green'}}></i><p style={{color: 'green'}}>Copied to clipboard!</p></> : <><i className="fa-regular fa-copy"></i><p>hello@deepsheth.in</p></>
-                        }
-                    </div>
+            </div>
+            <div className="connection-change">
+                <div className="change-btn">
+                    <button onClick={()=> setIsOne(true)} className={ isOne ? 'true-click' : ''}>Quick Connect</button>
+                    <button onClick={()=> setIsOne(false)} className={ isOne ? '' : 'false-click'}>Send a message</button>
                 </div>
             </div>
-            <div className='box-mid-connection'>
-                <p>or send a message</p>
-            </div>
-            <div className="lower-box">
-                <div className="lower-box-button">
-                    <div className="down-box-button">
-                        {
-                            firebase.isUserActive ? <><div className="box-icon-img"><div className="box-user-img"></div></div><p>{firebase.isUserActive.displayName}</p></> : <><p>Sign in for Continue</p> &nbsp; &nbsp; <i className="fa-solid fa-circle-info"></i></>
-                        }
-                    </div>
+            
+            {
+                isOne ? (
                     <>
-                        {
-                            firebase.isUserActive ? <><div className="down-box-button" onClick={()=> {firebase.userSignOut(); window.location.reload();}}><p>Logout</p><div className="box-icon-img"><div className="box-logout-img"></div></div></div></> : <><div className="down-box-button" onClick={()=> {firebase.loginWithGoogle(); setAlarm(true)}}><p>Sign in</p><div className="box-icon-img"><div className="box-logout-img"></div></div></div></>
-                        }
+                        <div className="quick">
+                            <div className="quick-divs">
+                                <div className="inner-quick-divs">
+                                    <div className="quick-google" onClick={()=>{firebase.isUserActive ? '' : firebase.loginWithGoogle();}}>
+                                        <div className="first-line-google">
+                                            <div className="quick-box-img">
+                                                <div className="box-icon-google"></div>
+                                            </div>
+                                            {
+                                                firebase.isUserActive ? <><p>{firebase.isUserActive.email}</p></> : <p>Sign up with Google &nbsp;<i className="fa-solid fa-arrow-right-to-bracket"></i></p>
+                                            }
+                                        </div>
+                                        <div className="second-line-google">
+                                            {
+                                                firebase.isUserActive ? <p>Hi, <span>{firebase.isUserActive.displayName}</span>! Welcome to my forever wroking place. Explore features and also make connection with me. <span onClick={()=>{firebase.userSignOut(); window.location.reload();}}>Sign out</span></p> : <p>Hello There! Here you can login and explore more features. Also you can make connection with me.</p>
+                                            }
+                                        </div>
+                                    </div>
+                                    <div className="quick-both">
+                                        <div className="quick-mail" onClick={()=>{window.open(firebase.isUserActive ? `mailto:deepsheth56@gmail.com&subject=Hi%20${firebase.isUserActive.displayName}` : `mailto:deepsheth56@gmail.com&subject=Hi%20Deep,`)}}>
+                                            <div className="first-line-both">
+                                                <div className="quick-box-img">
+                                                    <div className="box-icon-qemail"></div>
+                                                </div>
+                                                <p>Email</p>
+                                            </div>
+                                            <div className="second-line-both">
+                                                <p>hello@deepsheth.in</p>
+                                                <p>Send me an email directly</p>
+                                            </div>
+                                        </div>
+                                        <div className="quick-schedule" onClick={()=> {navigate('/error'); setCheckConnection(!checkConnection)}}>
+                                            <div className="first-line-both">
+                                                <div className="quick-box-img">
+                                                    <div className="box-icon-qschedule"></div>
+                                                </div>
+                                                <p>Schedule</p>
+                                            </div>
+                                            <div className="second-line-both">
+                                                <p>Book a time slot</p>
+                                                <p>Book a call on my calender</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div className="quick-available">
+                                    <div className="quick-available-slot">
+                                        <div className="bepper"></div>
+                                        <p>Currently available for new opportunities</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </>
-                </div>
-                <form onSubmit={writeMessage}>
-                    <input type="email" placeholder='Your email' value={email} onChange={(e)=>{ setEmail(e.target.value); setAlarm(true) }} required/>
-                    <textarea placeholder='Your message' value={message} onChange={(e)=>{ setMessage(e.target.value); setAlarm(true)}} required></textarea>
-                    {
-                        alarm ? <></> : <small style={{color: 'red'}}><i className='fa-solid fa-circle-info'></i> Sign Up for send message!</small>
-                    }
-                    <button>Send Message</button>
-                </form>
-            </div>
+                ) : (
+                    <>
+                        <div className="connection-message">
+                            <form onSubmit={writeMessage}>
+                                <div className="first-inp">
+                                    <label>
+                                        <p>Name</p>
+                                        <input type="text" placeholder='Your name' value={messagerName} className={ fieldError ? (messagerName ? '': 'occurs') : '' } onChange={(e)=> setMessagerName(e.target.value)}/>
+                                    </label>
+                                    <label>
+                                        <p>Email</p>
+                                        <input type="email" placeholder='your.email@example.com' value={email} className={ fieldError ? (email ? '' : 'occurs') : '' } onChange={(e)=> setEmail(e.target.value)}/>
+                                    </label>
+                                </div>
+                                <label className='text-label'>
+                                    <p>{userNotAvailable ? (firebase.isUserActive ? 'Message' : <span style={{color: 'red'}}>User not found!</span>) : 'Message'} <span>{message ? message.length : '0'}/1000</span></p>
+                                    <textarea placeholder='What would you like to discuss?' maxLength={1000} value={message} className={ fieldError ? (message ? '' : 'occurs') : '' } onChange={(e)=> setMessage(e.target.value)}></textarea>
+                                </label>
+                                <button className='con-form-btn' style={{ backgroundColor: userNotAvailable ? (firebase.isUserActive ? '' : 'red') : '', color: userNotAvailable ? (firebase.isUserActive ? '' : 'white') : '' }}><i className="fa-solid fa-paper-plane"></i> &nbsp; &nbsp; Send Message</button>
+                            </form>
+                        </div>
+                    </>
+                )
+            }
+            
         </div>
     </div>
   )

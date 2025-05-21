@@ -1,8 +1,16 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { useFirebase } from '../Firebase/Firebase'
 
 export default function Footer() {
     const firebase = useFirebase();
+    
+    const [isCopied, setIsCopied] = useState(false);
+
+    const copyMail = () => {
+    navigator.clipboard.writeText('deepsheth56@gmail.com')
+    .then(()=> setIsCopied(true));
+    }
+
   return (
     <>
     <div className="mid-contact"></div>
@@ -20,13 +28,15 @@ export default function Footer() {
             </div>
             <div className="rightInfo">
                 <p>Feel free to reach out to me for any inquiries or here's my mail.</p>
-                <p onClick={()=> window.open(firebase.isUserActive ? `mailto:deepsheth56@gmail.com&subject=Hi,%20${firebase.isUserActive.displayName}` : `mailto:deepsheth56@gmail.com&subject=Hi%20Deep,`)}><i className="fa-solid fa-envelope"></i> hello@deepsheth.in</p>
+                <p onClick={()=> copyMail() }>{
+                    isCopied ? <><i className="fa-solid fa-check"></i> Copied to clipboard!</> : <><i className="fa-regular fa-copy"></i> hello@deepsheth.in</>
+                    }</p>
             </div>
         </div>
     </div>
     <div className="gradiant-border"></div>
     <div className="contact-copyright">
-        <p>Developed and Desinged by Deep Sheth.</p>
+        <p>© 2025 Deep sheth. All rights reserved.</p>
     </div>
     </>
   )

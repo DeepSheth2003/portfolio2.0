@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import './Component.css';
-import Resume from '../assets/DeepOriginResume.pdf';
+import Resume from '../assets/DeepsCV.pdf';
 import { useNavigate } from 'react-router-dom';
 import { useFirebase } from '../Firebase/Firebase'
 
@@ -89,7 +89,7 @@ export default function Navbar() {
       <div className="inner-sidebar">
         <div className="navigation-sidebar">
           <p>Navigation</p>
-          <div className="sidebar-btn-div"  onClick={()=> navigate('/')}>
+          <div className="sidebar-btn-div"  onClick={()=> {navigate('/'); setCheck(!check)}}>
             <div className="sidebar-btn">
               <div className="sidebar-icon-home sideIcon"></div>
             </div>
@@ -98,7 +98,7 @@ export default function Navbar() {
               <p>Welcome to my forever work-in-progress!</p>
             </div>
           </div>
-          <div className="sidebar-btn-div" onClick={()=> navigate('/projects')}>
+          <div className="sidebar-btn-div" onClick={()=> {navigate('/projects'); setCheck(!check)}}>
             <div className="sidebar-btn">
               <div className="sidebar-icon-project sideIcon"></div>
             </div>
@@ -107,7 +107,7 @@ export default function Navbar() {
               <p>Showcase of my projects</p>
             </div>
           </div>
-          <div className="sidebar-btn-div" onClick={()=> navigate('/error')}>
+          <div className="sidebar-btn-div" onClick={()=> {navigate('/error'); setCheck(!check)}}>
             <div className="sidebar-btn">
               <div className="sidebar-icon-blog sideIcon"></div>
             </div>
@@ -116,7 +116,7 @@ export default function Navbar() {
               <p>Thoughts, Updates</p>
             </div>
           </div>
-          <div className="sidebar-btn-div" onClick={()=> navigate('/about')}>
+          <div className="sidebar-btn-div" onClick={()=> {navigate('/about'); setCheck(!check)}}>
             <div className="sidebar-btn">
               <div className="sidebar-icon-about sideIcon"></div>
             </div>
@@ -125,7 +125,7 @@ export default function Navbar() {
               <p>Learn more about me!</p>
             </div>
           </div>
-          <div className="sidebar-btn-div" onClick={()=> navigate('/contact')}>
+          <div className="sidebar-btn-div" onClick={()=> {navigate('/contact'); setCheck(!check)}}>
             <div className="sidebar-btn">
               <div className="sidebar-icon-contact sideIcon"></div>
             </div>
@@ -134,7 +134,7 @@ export default function Navbar() {
               <p>Let's have a conversation!</p>
             </div>
           </div>
-          <div className="sidebar-btn-div" onClick={()=> navigate('/guestbook')}>
+          <div className="sidebar-btn-div" onClick={()=> {navigate('/guestbook'); setCheck(!check)}}>
             <div className="sidebar-btn">
               <div className="sidebar-icon-guest sideIcon"></div>
             </div>
@@ -143,7 +143,7 @@ export default function Navbar() {
               <p>Leave a message for me</p>
             </div>
           </div>
-          <div className="sidebar-btn-div" onClick={()=> navigate('/links')}>
+          <div className="sidebar-btn-div" onClick={()=> {navigate('/links'); setCheck(!check)}}>
             <div className="sidebar-btn">
               <div className="sidebar-icon-links sideIcon"></div>
             </div>
@@ -182,7 +182,7 @@ export default function Navbar() {
               </>
             ) : (
               <>
-                <div className="sidebar-btn-div" onClick={()=> firebase.loginWithGoogle().then(()=> window.location.reload())}>
+                <div className="sidebar-btn-div" onClick={()=> {firebase.loginWithGoogle();}}>
                   <div className="sidebar-btn">
                     <div className="sidebar-icon-sign sideIcon"></div>
                   </div>

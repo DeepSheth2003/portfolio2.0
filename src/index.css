@@ -28,6 +28,7 @@
     --bgBackbtn: #222; /* For MoveTo or BackTo button */
     --bgSidebarbtn: #222; /* For Sidebar Hover button */
     --bgTech: #111; /* For technologies button */
+    --bgAvailable: rgba(0, 193, 77, 0.03);
 
     /* Background white color */
     --bgwhite: white;
@@ -36,6 +37,8 @@
 
     /* Borders */
     --brSetting: #222; /* For border of Sidebar Icons Settigs */
+    --brConnection: #333; /* For Connection box input boder */
+    --brAvailable: rgba(0, 193, 77, 0.13);
     
     /* Color of Texts */
     --textWhite: white;
@@ -49,6 +52,7 @@
     --text222: #222;
     --textGray: gray;
     --textMain: #E7E9BB;
+    --textAvailable: rgba(101, 195, 137, 1);
 
     /* Cup Image */
     --cupImage: url('./assets/blackShineCup.png');
@@ -84,6 +88,7 @@ body{
     --bgBackbtn: #222; /* For MoveTo or BackTo button */
     --bgSidebarbtn: #bbb; /* For Sidebar Hover button */
     --bgTech: #ddd; /* For technologies button */
+    --bgAvailable: rgba(0, 193, 77, 0.1);
 
     /* Background white color */
     --bgwhite: black;
@@ -92,6 +97,8 @@ body{
 
      /* Borders */
      --brSetting: #888; /* For border of Sidebar Icons Settigs */
+     --brConnection: #aaaaaa; /* For Connection box input boder */
+     --brAvailable: rgba(0, 193, 77, 0.3);
     
     /* Color of Texts */
     --textWhite: black;
@@ -105,6 +112,7 @@ body{
     --text222: #ddd;
     --textGray: #444;
     --textMain: #B38600;
+    --textAvailable: rgba(0, 133, 51, 1);
 
     /* Cup Image */
     --cupImage: url('./assets/silverCup.png');
