@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import Contact from './Contact'
 import { useNavigate } from 'react-router';
 import BackTo from '../Component/BackTo';
+import toast from 'react-hot-toast';
 
 export default function Links({updateConnection, setCheckConnection}) {
   const [isCopied, setIsCopied] = useState(false);
@@ -9,6 +10,7 @@ export default function Links({updateConnection, setCheckConnection}) {
   const copyMail = () => {
     navigator.clipboard.writeText('deepsheth56@gmail.com')
     .then(()=> setIsCopied(true));
+    toast.success('Copied!');
   }
 
   return (

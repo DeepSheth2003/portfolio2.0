@@ -1,3 +1,5 @@
+// Toaster by React-hot-toast
+import { Toaster } from 'react-hot-toast';
 // Components
 import Navbar from "./Component/Navbar"
 import Connection from "./Component/Connection"
@@ -22,6 +24,7 @@ function App() {
 
   return (
     <>
+      <Toaster />
       <Navbar updateConnection={checkConnection} setCheckConnection={setCheckConnection}/>
       <Connection checkConnection={checkConnection} setCheckConnection={setCheckConnection} />
       <Routes>

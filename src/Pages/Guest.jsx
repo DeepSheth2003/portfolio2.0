@@ -5,6 +5,7 @@ import Contact from './Contact'
 import { useFirebase } from '../Firebase/Firebase';
 import { useNavigate } from 'react-router';
 import BackTo from '../Component/BackTo';
+import toast from 'react-hot-toast';
 
 export default function Guest({updateConnection, setCheckConnection}) {
 
@@ -12,7 +13,11 @@ export default function Guest({updateConnection, setCheckConnection}) {
   const navigate = useNavigate();
 
   const  logIn = () => {
-    firebase.loginWithGoogle();
+    firebase.loginWithGoogle().then(()=>{
+        toast.success('Log in Successfull',{
+            duration: 4000
+        })
+    })
   }
 
   const [ inpVal , setInpVal ] = useState(null);
@@ -21,7 +26,20 @@ export default function Guest({updateConnection, setCheckConnection}) {
 
   const letsComment = (e) => {
     e.preventDefault();
-    firebase.setUpData(inpVal, firebase.isUserActive.displayName, firebase.isUserActive.email).then(() => window.location.reload() );
+    const promise = firebase.setUpData(inpVal, firebase.isUserActive.displayName, firebase.isUserActive.email);
+
+    toast.promise(promise, {
+        loading: 'Posting Comment...',
+        success: 'Comment Posted!',
+        error: 'Something went wrong!',
+    }, {
+        success: {
+            duration: 4000,
+            icon: '🔥'
+        }
+    })
+
+    promise.then(() => window.location.reload() );
   }
 
   useEffect(()=>{

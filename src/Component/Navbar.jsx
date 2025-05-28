@@ -3,6 +3,7 @@ import './Component.css';
 import Resume from '../assets/DeepsCV.pdf';
 import { useNavigate } from 'react-router-dom';
 import { useFirebase } from '../Firebase/Firebase'
+import toast from 'react-hot-toast';
 
 
 export default function Navbar() {
@@ -182,7 +183,7 @@ export default function Navbar() {
               </>
             ) : (
               <>
-                <div className="sidebar-btn-div" onClick={()=> {firebase.loginWithGoogle();}}>
+                <div className="sidebar-btn-div" onClick={()=> {firebase.loginWithGoogle().then(()=> toast.success('Log in Successfull',{duration:4000}))}}>
                   <div className="sidebar-btn">
                     <div className="sidebar-icon-sign sideIcon"></div>
                   </div>

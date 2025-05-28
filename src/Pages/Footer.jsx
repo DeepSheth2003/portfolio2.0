@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import { useFirebase } from '../Firebase/Firebase'
+import toast from 'react-hot-toast';
 
 export default function Footer() {
     const firebase = useFirebase();
@@ -9,6 +10,7 @@ export default function Footer() {
     const copyMail = () => {
     navigator.clipboard.writeText('deepsheth56@gmail.com')
     .then(()=> setIsCopied(true));
+    toast.success('Copied!');
     }
 
   return (

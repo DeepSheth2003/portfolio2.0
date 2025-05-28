@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { useFirebase } from '../Firebase/Firebase'
 import { useNavigate } from 'react-router';
+import toast from 'react-hot-toast';
 
 
 export default function Connection({checkConnection , setCheckConnection}) {
@@ -17,10 +18,22 @@ export default function Connection({checkConnection , setCheckConnection}) {
     const writeMessage = (e) => {
         e.preventDefault();
         try{
-            firebase.setMessage(messagerName, email, message, firebase.isUserActive.displayName).then(()=>{
-                window.location.reload();
+            const promise = firebase.setMessage(messagerName, email, message, firebase.isUserActive.displayName);
+            
+            toast.promise(promise, {
+                loading: 'Sending...',
+                success: 'Message Sent!',
+                error: 'Something went wrong!',
+            }, {
+                success: {
+                    icon: '🎉'
+                }
+            })
+
+            promise.then(()=>{
+                setTimeout(()=>window.location.reload(),2500);
             },()=>{
-                setFieldError(!fieldError);
+                setFieldError(true);
             })
         }
         catch{
@@ -62,7 +75,7 @@ export default function Connection({checkConnection , setCheckConnection}) {
                         <div className="quick">
                             <div className="quick-divs">
                                 <div className="inner-quick-divs">
-                                    <div className="quick-google" onClick={()=>{firebase.isUserActive ? '' : firebase.loginWithGoogle();}}>
+                                    <div className="quick-google" onClick={()=>{firebase.isUserActive ? '' : firebase.loginWithGoogle().then(()=> toast.success('Log in Successfull',{duration:4000}))}}>
                                         <div className="first-line-google">
                                             <div className="quick-box-img">
                                                 <div className="box-icon-google"></div>
