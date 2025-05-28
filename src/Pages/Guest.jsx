@@ -39,7 +39,7 @@ export default function Guest({updateConnection, setCheckConnection}) {
         }
     })
 
-    promise.then(() => window.location.reload() );
+    promise.then(() => setTimeout(()=> window.location.reload(),3000) );
   }
 
   useEffect(()=>{
